@@ -1,6 +1,6 @@
 const restController = {
   getRestaurants: (req, res) => {
-    return res.render('restaurants'); //有誤
+    return res.render('restaurants');
   },
 };
 module.exports = restController;

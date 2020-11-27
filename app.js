@@ -18,6 +18,7 @@ app.use((req, res, next) => {
   //產生local變數，並可以用req.flash 寫入
   res.locals.success_messages = req.flash('success_messages');
   res.locals.error_messages = req.flash('error_messages');
+  res.locals.user = req.user;
   next();
 });
 

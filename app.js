@@ -15,6 +15,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use('/upload', express.static(__dirname + '/upload'));
 
 app.use((req, res, next) => {
   //產生local變數，並可以用req.flash 寫入

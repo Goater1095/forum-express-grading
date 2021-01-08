@@ -51,16 +51,20 @@ const adminController = {
     }
   },
   getRestaurant: (req, res) => {
-    return Restaurant.findByPk(req.params.id, { raw: true }).then((restaurant) => {
-      return res.render('admin/restaurant', {
-        restaurant: restaurant,
-      });
-    });
+    return Restaurant.findByPk(req.params.id, { raw: true }).then(
+      (restaurant) => {
+        return res.render('admin/restaurant', {
+          restaurant: restaurant,
+        });
+      }
+    );
   },
   editRestaurant: (req, res) => {
-    return Restaurant.findByPk(req.params.id, { raw: true }).then((restaurant) => {
-      return res.render('admin/create', { restaurant: restaurant });
-    });
+    return Restaurant.findByPk(req.params.id, { raw: true }).then(
+      (restaurant) => {
+        return res.render('admin/create', { restaurant: restaurant });
+      }
+    );
   },
   putRestaurant: (req, res) => {
     if (!req.body.name) {
@@ -83,7 +87,10 @@ const adminController = {
               image: file ? img.data.link : restaurant.image,
             })
             .then((restaurant) => {
-              req.flash('success_messages', 'restaurant was successfully to update');
+              req.flash(
+                'success_messages',
+                'restaurant was successfully to update'
+              );
               res.redirect('/admin/restaurants');
             });
         });
@@ -100,7 +107,10 @@ const adminController = {
             image: restaurant.image,
           })
           .then((restaurant) => {
-            req.flash('success_messages', 'restaurant was successfully to update');
+            req.flash(
+              'success_messages',
+              'restaurant was successfully to update'
+            );
             res.redirect('/admin/restaurants');
           });
       });
@@ -118,7 +128,18 @@ const adminController = {
       return res.render('admin/users', { users });
     });
   },
-  toggleAdmin: (req, res) => {},
+  toggleAdmin: (req, res) => {
+    return User.findByPk(req.params.id).then((user) => {
+      user
+        .update({
+          isAdmin: !user.isAdmin,
+        })
+        .then((user) => {
+          req.flash('success_messages', 'user was successfully to update');
+          res.redirect('/admin/users');
+        });
+    });
+  },
 };
 
 module.exports = adminController;

@@ -1,11 +1,17 @@
+{{#if user.isAdmin}}
 <h1>餐廳後台</h1>
+{{else}}
+<h1>餐廳清單</h1>
+{{/if}}
 
 <a href='/admin/restaurants/create'>
   <button type="button" class="btn btn-primary">New Restaurant</button>
 </a>
+{{#if user.isAdmin}}
 <a href='/admin/users'>
   <button type="button" class="btn btn-primary">Users</button>
 </a>
+{{/if}}
 <br />
 <br />
 
@@ -28,6 +34,7 @@
             Show
           </a>
         </button>
+        {{!-- {{#if user.isAdmin}} --}}
         <button type="button" class="btn btn-link">
           <a href="/admin/restaurants/{{this.id}}/edit">
             Edit
@@ -36,6 +43,7 @@
         <form action="/admin/restaurants/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
           <button type="submit" class="btn btn-link">Delete</button>
         </form>
+        {{!-- {{/if}} --}}
       </td>
     </tr>
     {{/each}}

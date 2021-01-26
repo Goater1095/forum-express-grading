@@ -4,9 +4,6 @@
   <button type="button" class="btn btn-primary">Restaurants</button>
 </a>
 
-{{!-- <a href='/admin/users'>
-  <button type="button" class="btn btn-primary">Users</button>
-</a> --}}
 
 <br />
 <br />
@@ -41,6 +38,10 @@
             Set as admin
             {{/if}}
           </button>
+          {{!-- 為何user不存在了!!!?? --}}
+          {{#if user}}
+          <div class="test">哈哈哈 {{user}} //and// {{this.name}} </div>
+          {{/if}}
         </form>
       </td>
     </tr>

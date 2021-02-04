@@ -70,7 +70,7 @@ const adminController = {
     return Restaurant.findByPk(req.params.id, {
       include: [Category],
     }).then((restaurant) => {
-      // console.log(restaurant);
+      console.log(restaurant);
       return res.render('admin/restaurant', {
         restaurant: restaurant.toJSON(),
       });

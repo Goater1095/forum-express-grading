@@ -1,0 +1,15 @@
+<H2 class='mt-5'> Edit Profile </H2>
+<form action="/users/{{user.id}}?_method=PUT" method="POST" style="width: 100%;">
+  <div class="form-label-group mb-1">
+    <label for="inputName">Name</label>
+    <input type="text" name="Name" class="form-control" value="{{user.name}}" required autofocus>
+  </div>
+  <div class="form-label-group">
+    <label for="inputImage">Image</label>
+    <div class="input-group mb-3">
+      <input type="file" class="form-control p-1" value="{{user.image}}">
+    </div>
+  </div>
+  <br />
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+</form>

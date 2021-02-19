@@ -1,4 +1,5 @@
 'use strict';
+const faker = require('faker');
 const bcrypt = require('bcryptjs');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,6 +13,7 @@ module.exports = {
           name: 'root',
           createdAt: new Date(),
           updatedAt: new Date(),
+          image: faker.image.people(),
         },
         {
           email: 'user1@example.com',
@@ -20,6 +22,7 @@ module.exports = {
           name: 'user1',
           createdAt: new Date(),
           updatedAt: new Date(),
+          image: faker.image.people(),
         },
         {
           email: 'user2@example.com',
@@ -28,6 +31,7 @@ module.exports = {
           name: 'user2',
           createdAt: new Date(),
           updatedAt: new Date(),
+          image: faker.image.people(),
         },
       ],
       {}

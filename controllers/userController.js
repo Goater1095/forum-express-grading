@@ -49,6 +49,17 @@ const userController = {
     req.logout();
     res.redirect('/signin');
   },
+  getUser: (req, res) => {
+    // return User.findByPk(req.params.id).then((user) => {
+    res.render('userProfile');
+    // });
+  },
+  editUser: (req, res) => {
+    res.render('editUserProfile');
+  },
+  putUser: (req, res) => {
+    return User.findByPk(req.params.id).then((user) => {});
+  },
 };
 
 module.exports = userController;

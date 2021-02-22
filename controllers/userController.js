@@ -52,9 +52,12 @@ const userController = {
     res.redirect('/signin');
   },
   getUser: (req, res) => {
-    // return User.findByPk(req.params.id).then((user) => {
-    res.render('userProfile');
-    // });
+    //  res.render('userProfile');  只要render 從locals取來的使用者資訊即可
+
+    //A19作業需求 需要傳user出去才會過測試
+    return User.findByPk(req.params.id).then((user) => {
+      res.render('userProfile', { user: user.toJSON() });
+    });
   },
   editUser: (req, res) => {
     res.render('editUserProfile');

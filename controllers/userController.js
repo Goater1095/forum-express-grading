@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const db = require('../models');
 const User = db.User;
+const fs = require('fs');
+const { getRestaurant } = require('./restController');
 
 const userController = {
   signUpPage: (req, res) => {
@@ -58,7 +60,43 @@ const userController = {
     res.render('editUserProfile');
   },
   putUser: (req, res) => {
-    return User.findByPk(req.params.id).then((user) => {});
+    const { file } = req;
+    if (file) {
+      fs.readFile(file.path, (err, data) => {
+        if (err) console.log('Error:', err);
+        fs.writeFile(`upload/${file.originalname}`, data, () => {
+          return User.findByPk(req.params.id).then((user) => {
+            user
+              .update({
+                name: req.body.name,
+                image: file ? `/upload/${file.originalname}` : user.image,
+              })
+              .then((user) => {
+                req.flash(
+                  'success_messages',
+                  'User Profile was successfully to update'
+                );
+                res.redirect('userProfile');
+              });
+          });
+        });
+      });
+    } else {
+      return User.findByPk(req.params.id).then((user) => {
+        user
+          .update({
+            name: req.body.name,
+            image: user.image,
+          })
+          .then((user) => {
+            req.flash(
+              'success_messages',
+              'User Profile was successfully to update'
+            );
+            res.redirect('userProfile');
+          });
+      });
+    }
   },
 };
 

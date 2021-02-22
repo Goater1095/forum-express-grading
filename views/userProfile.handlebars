@@ -12,3 +12,19 @@
     </div>
   </div>
 </div>
+
+<div class="card mt-3">
+  <h6 class="card-header py-2">
+    {{user.Comments.length}} 已評論餐廳
+  </h6>
+  <ul class="pagination">
+    {{#each user.Comments}}
+    <li class="page-item">
+      <a class="page-link" href="/restaurants/{{this.RestaurantId}}">
+        <img class="img-fluid mx-auto img-thumbnail rounded" style="width:80px;" src="{{this.Restaurant.image}}" alt="">
+        <div>{{this.Restaurant.name}}</div>
+      </a>
+    </li>
+    {{/each}}
+  </ul>
+</div>

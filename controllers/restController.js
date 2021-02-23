@@ -70,9 +70,9 @@ const restController = {
       ); // 找出收藏此餐廳的 user
       return res.render('restaurant', {
         restaurant: restaurant.toJSON(),
-        isFavorited: isFavorited  // 將資料傳到前端
+        isFavorited: isFavorited, // 將資料傳到前端
       });
-    };);
+    });
   },
   getFeeds: (req, res) => {
     return Promise.all([

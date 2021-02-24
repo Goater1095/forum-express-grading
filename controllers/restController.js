@@ -67,6 +67,8 @@ const restController = {
         { model: Comment, include: [User] },
       ],
     }).then((restaurant) => {
+      //increment = UPDATE `Restaurants` SET `viewCounts`=`viewCounts`+ 1
+      restaurant.increment('viewCounts');
       const isFavorited = restaurant.FavoritedUsers.map((d) => d.id).includes(
         req.user.id
       ); // 找出收藏此餐廳的 user
@@ -101,6 +103,13 @@ const restController = {
         restaurants: restaurants,
         comments: comments,
       });
+    });
+  },
+  getDashboard: (req, res) => {
+    return Restaurant.findByPk(req.params.id, {
+      include: [Category, Comment],
+    }).then((restaurant) => {
+      return res.render('dashboard', { restaurant: restaurant.toJSON() });
     });
   },
 };

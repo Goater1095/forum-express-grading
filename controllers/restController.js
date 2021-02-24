@@ -40,6 +40,7 @@ const restController = {
         isFavorited: req.user.FavoritedRestaurants.map((d) => d.id).includes(
           r.id
         ),
+        isLiked: req.user.LikedRestaurants.map((d) => d.id).includes(r.id),
       }));
       Category.findAll({
         raw: true,
@@ -62,15 +63,20 @@ const restController = {
       include: [
         Category,
         { model: User, as: 'FavoritedUsers' },
+        { model: User, as: 'LikedUsers' },
         { model: Comment, include: [User] },
       ],
     }).then((restaurant) => {
       const isFavorited = restaurant.FavoritedUsers.map((d) => d.id).includes(
         req.user.id
       ); // 找出收藏此餐廳的 user
+      const isLiked = restaurant.LikedUsers.map((d) => d.id).includes(
+        req.user.id
+      );
       return res.render('restaurant', {
         restaurant: restaurant.toJSON(),
         isFavorited: isFavorited, // 將資料傳到前端
+        isLiked: isLiked,
       });
     });
   },

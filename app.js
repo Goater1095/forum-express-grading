@@ -41,6 +41,5 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-require('./routes')(app, passport); //注意此寫法
-
-module.exports = app;
+// 引入 routes (自動指定使用index) 並將 app 傳進去，讓 routes 可以用 app 這個物件來指定路由
+require('./routes')(app); //注意此寫法
